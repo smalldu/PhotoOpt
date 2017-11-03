@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController {
 
-  
   @IBOutlet weak var choose: UIButton!
   
   override func viewDidLoad() {
@@ -21,7 +20,8 @@ class ViewController: UIViewController {
   
   @objc func chooseClick(){
     let plc = PhotoListController()
-    self.present(plc, animated: true, completion: nil)
+    let nav = UINavigationController(rootViewController: plc)
+    self.present(nav, animated: true, completion: nil)
   }
 }
 
