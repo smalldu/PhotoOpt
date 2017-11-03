@@ -21,7 +21,7 @@ class ViewController: UIViewController {
   
   @objc func chooseClick(){
     let plc = PhotoListController()
-    self.navigationController?.pushViewController(plc, animated: true)
+    self.present(plc, animated: true, completion: nil)
   }
 }
 

@@ -16,6 +16,9 @@
 		20EDCB341FAC435D0009C4C1 /* PhotoOptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB331FAC435D0009C4C1 /* PhotoOptUITests.swift */; };
 		20EDCB441FAC43D40009C4C1 /* PHAsset+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */; };
 		20EDCB471FAC4FE70009C4C1 /* PhotoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB461FAC4FE70009C4C1 /* PhotoListController.swift */; };
+		20EDCB841FAC7CAE0009C4C1 /* PhotoBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB831FAC7CAE0009C4C1 /* PhotoBottomView.swift */; };
+		20EDCB861FAC7D920009C4C1 /* UIView+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */; };
+		20EDCB881FAC7F660009C4C1 /* PhotoTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB871FAC7F660009C4C1 /* PhotoTopView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		20EDCB351FAC435D0009C4C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+ext.swift"; sourceTree = "<group>"; };
 		20EDCB461FAC4FE70009C4C1 /* PhotoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListController.swift; sourceTree = "<group>"; };
+		20EDCB831FAC7CAE0009C4C1 /* PhotoBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBottomView.swift; sourceTree = "<group>"; };
+		20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+exts.swift"; sourceTree = "<group>"; };
+		20EDCB871FAC7F660009C4C1 /* PhotoTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTopView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,7 @@
 		20EDCB411FAC43D40009C4C1 /* PhotoOpt */ = {
 			isa = PBXGroup;
 			children = (
+				20EDCB821FAC7C850009C4C1 /* Views */,
 				20EDCB451FAC4FC10009C4C1 /* ViewControllers */,
 				20EDCB421FAC43D40009C4C1 /* Exts */,
 			);
@@ -143,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */,
+				20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */,
 			);
 			path = Exts;
 			sourceTree = "<group>";
@@ -153,6 +161,15 @@
 				20EDCB461FAC4FE70009C4C1 /* PhotoListController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		20EDCB821FAC7C850009C4C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				20EDCB831FAC7CAE0009C4C1 /* PhotoBottomView.swift */,
+				20EDCB871FAC7F660009C4C1 /* PhotoTopView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,8 +306,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20EDCB861FAC7D920009C4C1 /* UIView+exts.swift in Sources */,
+				20EDCB881FAC7F660009C4C1 /* PhotoTopView.swift in Sources */,
 				20EDCB441FAC43D40009C4C1 /* PHAsset+ext.swift in Sources */,
 				20EDCB161FAC435D0009C4C1 /* ViewController.swift in Sources */,
+				20EDCB841FAC7CAE0009C4C1 /* PhotoBottomView.swift in Sources */,
 				20EDCB471FAC4FE70009C4C1 /* PhotoListController.swift in Sources */,
 				20EDCB141FAC435D0009C4C1 /* AppDelegate.swift in Sources */,
 			);
