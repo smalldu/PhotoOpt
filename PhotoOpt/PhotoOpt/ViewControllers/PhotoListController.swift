@@ -19,8 +19,10 @@ class PhotoListController: UIViewController {
     case normal
   }
   
-  
-  lazy var categoryVC = PhotoCategoryController()
+  lazy var categoryVC: PhotoCategoryController = {
+    let vc = PhotoCategoryController(assetCategorys: self.assetManager.categorys)
+    return vc
+  }()
   var isAnimating = false
   
   lazy var btmView: UIView = {
@@ -155,6 +157,7 @@ extension PhotoListController {
     setupTitleView()
     collectionView.delegate = self
     collectionView.dataSource = self
+    self.assetManager.fetchOthers()
   }
   
   

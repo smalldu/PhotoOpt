@@ -26,7 +26,7 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
         cell.type = .normal
       }
     } else {
-    
+      cell.type = .normal
     }
     cell.representedAssetIdentifier = asset.localIdentifier
     imageManager.requestImage(for: asset , targetSize: self.thumbnailSize , contentMode: .aspectFill , options: nil) { (image, info ) in
@@ -44,7 +44,6 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     updateCachedAssets()
   }
-  
 }
 
 

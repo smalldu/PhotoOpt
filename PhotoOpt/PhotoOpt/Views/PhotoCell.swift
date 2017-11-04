@@ -21,8 +21,6 @@ class PhotoCell: UICollectionViewCell {
   @IBOutlet weak var content: UIImageView!
   @IBOutlet weak var flag: UILabel!
   
-  
-  
   var type: PhotoType = .normal {
     didSet{
       if type == .normal {

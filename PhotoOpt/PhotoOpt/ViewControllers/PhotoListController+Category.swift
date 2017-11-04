@@ -20,6 +20,7 @@ extension PhotoListController {
     var transform: CGAffineTransform!
     if self.state == .normal {
       addCategoryIfNeeded()
+      categoryVC.assetCategorys = self.assetManager.categorys
       categoryVC.view.isHidden = false
       categoryVC.view.backgroundColor = UIColor.black.withAlphaComponent(0)
       transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi))
@@ -58,7 +59,6 @@ extension PhotoListController {
       categoryVC.fadeIn()
     }
   }
-  
 }
 
 

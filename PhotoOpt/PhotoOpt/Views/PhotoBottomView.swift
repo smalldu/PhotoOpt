@@ -9,7 +9,6 @@
 import UIKit
 
 class PhotoBottomView: UIView {
-
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -24,5 +23,4 @@ class PhotoBottomView: UIView {
   func prepareView(){
     
   }
-
 }
