@@ -27,7 +27,7 @@ extension PhotoListController {
   func updateCachedAssets() {
     // Update only if the view is visible.
     guard isViewLoaded && view.window != nil else { return }
-    
+    guard let fetchResult = self.category?.result else { return }
     // The preheat window is twice the height of the visible rect.
     let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
     let preheatRect = visibleRect.insetBy(dx: 0, dy: -0.5 * visibleRect.height)

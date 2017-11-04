@@ -21,6 +21,6 @@ class PhotoBottomView: UIView {
   }
   
   func prepareView(){
-    
+    self.backgroundColor = UIColor.white
   }
 }

@@ -34,6 +34,7 @@ struct AssetCategory {
 
 class AssetManager {
   
+  var firstCategory: AssetCategory
   var allPhotos: PHFetchResult<PHAsset>
   var smartAlbums: PHFetchResult<PHAssetCollection>!
   var userCollections: PHFetchResult<PHCollection>!
@@ -43,15 +44,15 @@ class AssetManager {
     let allPhotosOptions = PHFetchOptions()
     allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
     allPhotos = PHAsset.fetchAssets(with: .image, options: allPhotosOptions)
+    firstCategory = AssetCategory()
+    firstCategory.result = allPhotos
+    firstCategory.title = NSLocalizedString("所有照片", comment: "")
+    firstCategory.count = allPhotos.count
   }
   
   func fetchOthers(){
     categorys.removeAll()
-    var category = AssetCategory()
-    category.count = allPhotos.count
-    category.title = NSLocalizedString("所有照片", comment: "")
-    category.result = allPhotos
-    categorys.append(category)
+    categorys.append(firstCategory)
     
     DispatchQueue.global(qos: .background).async {
       self.smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)

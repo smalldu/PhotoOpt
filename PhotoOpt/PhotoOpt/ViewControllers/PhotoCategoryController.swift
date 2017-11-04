@@ -9,6 +9,10 @@
 import UIKit
 import Photos
 
+protocol PhotoCategoryDelegate: class {
+  func categoryDidSelected(_ controller: PhotoCategoryController,category:AssetCategory)
+}
+
 class PhotoCategoryController: UIViewController {
   
   var assetCategorys: [AssetCategory] {
@@ -18,6 +22,7 @@ class PhotoCategoryController: UIViewController {
   }
   fileprivate var realCategoryAssets: [AssetCategory] = []
   let imageManager = PHCachingImageManager()
+  weak var delegate: PhotoCategoryDelegate?
   
   let tableView: UITableView = {
     let tv = UITableView()
@@ -61,8 +66,6 @@ class PhotoCategoryController: UIViewController {
   }
   
 }
-
-
 
 // MARK: - setup
 
@@ -111,7 +114,8 @@ extension PhotoCategoryController: UITableViewDataSource,UITableViewDelegate{
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+    let category = realCategoryAssets[indexPath.row]
+    delegate?.categoryDidSelected(self, category: category)
   }
   
 }

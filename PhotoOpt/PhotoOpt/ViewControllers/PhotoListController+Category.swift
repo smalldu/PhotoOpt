@@ -55,6 +55,7 @@ extension PhotoListController {
       view.addSubview(categoryVC.view)
       categoryVC.view.frame = view.bounds
       categoryVC.didMove(toParentViewController: self)
+      categoryVC.delegate = self
     }else{
       categoryVC.fadeIn()
     }
@@ -62,5 +63,13 @@ extension PhotoListController {
 }
 
 
-
+extension PhotoListController: PhotoCategoryDelegate{
+  
+  func categoryDidSelected(_ controller: PhotoCategoryController, category: AssetCategory) {
+    self.category = category
+    clickTitle()
+    self.collectionView.reloadData()
+  }
+  
+}
 

@@ -27,7 +27,6 @@ class PhotoListController: UIViewController {
   
   lazy var btmView: UIView = {
     let view = PhotoBottomView()
-    view.backgroundColor = UIColor.lightGray
     return view
   }()
   
@@ -82,6 +81,7 @@ class PhotoListController: UIViewController {
   }()
   
   var state = State.normal
+  var category: AssetCategory?
   
 //  public var assetGroupTypes: [PHAssetCollectionSubtype] = [
 //          .smartAlbumUserLibrary,
@@ -94,10 +94,6 @@ class PhotoListController: UIViewController {
 //  private func collectionTypeForSubtype(_ subtype: PHAssetCollectionSubtype) -> PHAssetCollectionType {
 //    return subtype.rawValue < PHAssetCollectionSubtype.smartAlbumGeneric.rawValue ? .album : .smartAlbum
 //  }
-  
-  
-  var fetchResult: PHFetchResult<PHAsset>!
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -178,7 +174,7 @@ extension PhotoListController {
   }
   
   func setupData(){
-    self.fetchResult = assetManager.allPhotos
+    self.category = assetManager.firstCategory
   }
   
   @objc func clickCancel(){

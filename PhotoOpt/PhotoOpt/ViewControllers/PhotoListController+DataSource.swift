@@ -14,7 +14,7 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath) as! PhotoCell
-    let asset = fetchResult.object(at: indexPath.item)
+    guard let asset = self.category?.result?.object(at: indexPath.item) else { return UICollectionViewCell() }
     
     if #available(iOS 9.1, *) {
       if asset.mediaSubtypes.contains(.photoLive) {
@@ -38,7 +38,7 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.fetchResult.count
+    return self.category?.result?.count ?? 0
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
