@@ -44,7 +44,7 @@ class PhotoListController: UIViewController {
     let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
     cv.backgroundColor = UIColor.white
     cv.register(UINib(nibName: PhotoCell.reuseID, bundle: Bundle.main), forCellWithReuseIdentifier: PhotoCell.reuseID)
-    
+    cv.alwaysBounceVertical = true
     return cv
   }()
   
