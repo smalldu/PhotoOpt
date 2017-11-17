@@ -15,7 +15,6 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath) as! PhotoCell
     guard let asset = self.category?.result?.object(at: indexPath.item) else { return UICollectionViewCell() }
-    
     if #available(iOS 9.1, *) {
       if asset.mediaSubtypes.contains(.photoLive) {
         // Live
@@ -28,6 +27,7 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
     } else {
       cell.type = .normal
     }
+    cell.isChoosed = SelectedAssetManager.shared.contains(asset)
     cell.representedAssetIdentifier = asset.localIdentifier
     imageManager.requestImage(for: asset , targetSize: self.thumbnailSize , contentMode: .aspectFill , options: nil) { (image, info ) in
       if cell.representedAssetIdentifier == asset.localIdentifier && image != nil {
@@ -35,6 +35,11 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
       }
     }
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let asset = self.category?.result?.object(at: indexPath.item) else { return }
+    SelectedAssetManager.shared.toggle(asset)
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

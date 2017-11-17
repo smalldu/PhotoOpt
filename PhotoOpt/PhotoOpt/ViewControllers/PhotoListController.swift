@@ -15,7 +15,7 @@ let sh: CGFloat = UIScreen.main.bounds.height
 class PhotoListController: UIViewController {
   
   enum State {
-    case modeling
+    case modeling // 正在 选择相册
     case normal
   }
   
@@ -23,10 +23,12 @@ class PhotoListController: UIViewController {
     let vc = PhotoCategoryController(assetCategorys: self.assetManager.categorys)
     return vc
   }()
+  
   var isAnimating = false
   
   lazy var btmView: UIView = {
     let view = PhotoBottomView()
+    view.backgroundColor = UIColor.cf8f8f8
     return view
   }()
   
@@ -83,32 +85,12 @@ class PhotoListController: UIViewController {
   var state = State.normal
   var category: AssetCategory?
   
-//  public var assetGroupTypes: [PHAssetCollectionSubtype] = [
-//          .smartAlbumUserLibrary,
-//          .smartAlbumFavorites,
-//          .smartAlbumRecentlyAdded,
-//          .smartAlbumPanoramas,
-//          .smartAlbumScreenshots,
-//          .albumRegular
-//        ]
-//  private func collectionTypeForSubtype(_ subtype: PHAssetCollectionSubtype) -> PHAssetCollectionType {
-//    return subtype.rawValue < PHAssetCollectionSubtype.smartAlbumGeneric.rawValue ? .album : .smartAlbum
-//  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.white
     resetCachedAssets()
-    
     layoutUI()
     setupData()
-//    for type in assetGroupTypes {
-//      let fetchResult = PHAssetCollection.fetchAssetCollections(with: collectionTypeForSubtype(type), subtype: type, options: nil)
-//      fetchResult.enumerateObjects({ (collection, index, stop) in
-//        print(collection.localIdentifier)
-//        print(collection.localizedTitle ?? "")
-//      })
-//    }
   }
   
   override func viewWillLayoutSubviews() {
@@ -125,6 +107,7 @@ class PhotoListController: UIViewController {
     updateCachedAssets()
   }
   
+  /// 更新size
   private func updateItemSize() {
     let viewWidth = view.bounds.size.width
     let desiredItemWidth: CGFloat = 100
@@ -140,7 +123,6 @@ class PhotoListController: UIViewController {
   }
 }
 
-
 // MARK: - layout
 extension PhotoListController {
   func layoutUI(){
@@ -149,14 +131,14 @@ extension PhotoListController {
     view.addSubview(collectionView)
     view.addConstraintsWith(formart: "H:|[v0]|", views: btmView)
     view.addConstraintsWith(formart: "H:|[v0]|", views: collectionView)
-    view.addConstraintsWith(formart: "V:|[v0][v1(80)]|", views: collectionView,btmView)
+    view.addConstraintsWith(formart: "V:|[v0][v1(49)]|", views: collectionView,btmView)
     setupTitleView()
     collectionView.delegate = self
     collectionView.dataSource = self
     self.assetManager.fetchOthers()
   }
   
-  
+  /// 配置 title
   func setupTitleView(){
     topView.frame = CGRect(x: 0, y: 0, width: 220, height: 50)
     navigationItem.titleView = topView

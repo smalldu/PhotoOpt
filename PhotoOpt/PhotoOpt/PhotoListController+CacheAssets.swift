@@ -23,7 +23,6 @@ extension PhotoListController {
     previousPreheatRect = .zero
   }
   
-  
   func updateCachedAssets() {
     // Update only if the view is visible.
     guard isViewLoaded && view.window != nil else { return }

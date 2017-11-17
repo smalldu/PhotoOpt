@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,14 +33,27 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v52-WT-cUa">
+                        <rect key="frame" x="89" y="5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="MsO-TN-EBb"/>
+                            <constraint firstAttribute="height" constant="25" id="O2i-Np-utk"/>
+                        </constraints>
+                        <color key="tintColor" red="0.0" green="0.46571630600000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" image="selected">
+                            <color key="titleColor" red="0.40000000000000002" green="0.83137254900000002" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="zTW-Vh-VwR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2ZD-QU-Q4G"/>
                 <constraint firstAttribute="bottom" secondItem="zTW-Vh-VwR" secondAttribute="bottom" id="OvN-N8-Hfc"/>
+                <constraint firstItem="v52-WT-cUa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Zgn-dT-cDr"/>
                 <constraint firstItem="0Mw-IU-gpG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hw6-3r-UmK"/>
                 <constraint firstAttribute="trailing" secondItem="0Mw-IU-gpG" secondAttribute="trailing" id="nMb-sU-sj5"/>
                 <constraint firstItem="0Mw-IU-gpG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tIC-80-EbN"/>
+                <constraint firstAttribute="trailing" secondItem="v52-WT-cUa" secondAttribute="trailing" constant="5" id="ubM-O2-947"/>
                 <constraint firstAttribute="bottom" secondItem="0Mw-IU-gpG" secondAttribute="bottom" id="xsZ-i2-gzY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -47,8 +61,12 @@
             <connections>
                 <outlet property="content" destination="0Mw-IU-gpG" id="9wJ-dI-kQw"/>
                 <outlet property="flag" destination="zTW-Vh-VwR" id="U6S-ab-oeR"/>
+                <outlet property="selectBtn" destination="v52-WT-cUa" id="kZO-Ae-342"/>
             </connections>
-            <point key="canvasLocation" x="-135.5" y="43"/>
+            <point key="canvasLocation" x="-304.5" y="79"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="selected" width="200" height="200"/>
+    </resources>
 </document>

@@ -20,6 +20,7 @@ class PhotoCell: UICollectionViewCell {
   
   @IBOutlet weak var content: UIImageView!
   @IBOutlet weak var flag: UILabel!
+  @IBOutlet weak var selectBtn: UIButton!
   
   var type: PhotoType = .normal {
     didSet{
@@ -38,12 +39,24 @@ class PhotoCell: UICollectionViewCell {
     }
   }
   
+  var isChoosed: Bool  = false{
+    didSet{
+      if isChoosed {
+        selectBtn.tintColor = UIColor.lightGray
+      }else{
+        selectBtn.tintColor = UIColor.blue
+      }
+    }
+  }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     content.contentMode = .scaleAspectFill
     content.clipsToBounds = true
-    
+    selectBtn.tintColor = UIColor.lightGray
   }
+  
+  
   
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20C3F6951FBEC1A80062AB0C /* UIColor+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */; };
+		20C3F6971FBEE04E0062AB0C /* SelectedAssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */; };
 		20EDCB141FAC435D0009C4C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB131FAC435D0009C4C1 /* AppDelegate.swift */; };
 		20EDCB161FAC435D0009C4C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB151FAC435D0009C4C1 /* ViewController.swift */; };
 		20EDCB191FAC435D0009C4C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20EDCB171FAC435D0009C4C1 /* Main.storyboard */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+exts.swift"; sourceTree = "<group>"; };
+		20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAssetManager.swift; sourceTree = "<group>"; };
 		20EDCB101FAC435D0009C4C1 /* PhotoOpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoOpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20EDCB131FAC435D0009C4C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20EDCB151FAC435D0009C4C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			children = (
 				20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */,
 				20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */,
+				20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */,
 			);
 			path = Exts;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			children = (
 				C4AC9FF01FAC9B55003D8B1B /* AssetManager.swift */,
 				20EDCB8D1FADC92D0009C4C1 /* AssetItem.swift */,
+				20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -353,9 +359,11 @@
 				20EDCB8E1FADC92D0009C4C1 /* AssetItem.swift in Sources */,
 				20EDCB841FAC7CAE0009C4C1 /* PhotoBottomView.swift in Sources */,
 				20EDCB471FAC4FE70009C4C1 /* PhotoListController.swift in Sources */,
+				20C3F6951FBEC1A80062AB0C /* UIColor+exts.swift in Sources */,
 				20EDCB141FAC435D0009C4C1 /* AppDelegate.swift in Sources */,
 				C4AC9FF11FAC9B55003D8B1B /* AssetManager.swift in Sources */,
 				C4AC9FF31FAC9E88003D8B1B /* PhotoListController+DataSource.swift in Sources */,
+				20C3F6971FBEE04E0062AB0C /* SelectedAssetManager.swift in Sources */,
 				C4AC9FFB1FACBDB2003D8B1B /* PhotoListController+Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

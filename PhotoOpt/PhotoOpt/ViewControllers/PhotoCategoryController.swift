@@ -117,7 +117,6 @@ extension PhotoCategoryController: UITableViewDataSource,UITableViewDelegate{
     let category = realCategoryAssets[indexPath.row]
     delegate?.categoryDidSelected(self, category: category)
   }
-  
 }
 
 
