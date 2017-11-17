@@ -42,9 +42,9 @@ class PhotoCell: UICollectionViewCell {
   var isChoosed: Bool  = false{
     didSet{
       if isChoosed {
-        selectBtn.tintColor = UIColor.lightGray
-      }else{
         selectBtn.tintColor = UIColor.blue
+      }else{
+        selectBtn.tintColor = UIColor.lightGray
       }
     }
   }
@@ -56,6 +56,18 @@ class PhotoCell: UICollectionViewCell {
     selectBtn.tintColor = UIColor.lightGray
   }
   
+  func choosed(){
+    UIView.animate(withDuration: 0.3, animations: {
+      
+    }) { b in
+      
+    }
+    selectBtn.tintColor = UIColor.blue
+  }
+  
+  func unchoosed(){
+    
+  }
   
   
 }
