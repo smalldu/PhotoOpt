@@ -19,6 +19,9 @@ class PhotoListController: UIViewController {
     case normal
   }
   
+  /// 最大可选择数量
+  public var maxSelectedCount: Int = 9
+  
   lazy var categoryVC: PhotoCategoryController = {
     let vc = PhotoCategoryController(assetCategorys: self.assetManager.categorys)
     return vc
@@ -26,7 +29,7 @@ class PhotoListController: UIViewController {
   
   var isAnimating = false
   
-  lazy var btmView: UIView = {
+  lazy var btmView: PhotoBottomView = {
     let view = PhotoBottomView()
     view.backgroundColor = UIColor.cf8f8f8
     return view
@@ -84,10 +87,16 @@ class PhotoListController: UIViewController {
   
   var state = State.normal
   var category: AssetCategory?
+  var complete: (([AssetItem])->())?
+  
+  func completeHandler(_ complete: (([AssetItem])->())?){
+    self.complete = complete
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.white
+    SelectedAssetManager.shared.register()
     resetCachedAssets()
     layoutUI()
     setupData()
@@ -101,6 +110,7 @@ class PhotoListController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     updateItemSize()
+    self.navigationController?.setNavigationBarHidden(false, animated: true)
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -121,12 +131,17 @@ class PhotoListController: UIViewController {
     let scale = UIScreen.main.scale
     thumbnailSize = CGSize(width: itemSize.width * scale, height: itemSize.height * scale)
   }
+  
+  deinit {
+    print("PhotoListController 已销毁")
+  }
 }
 
 // MARK: - layout
 extension PhotoListController {
   func layoutUI(){
     navigationItem.leftBarButtonItem = cancelItemBar
+    btmView.delegate = self
     view.addSubview(btmView)
     view.addSubview(collectionView)
     view.addConstraintsWith(formart: "H:|[v0]|", views: btmView)

@@ -21,6 +21,7 @@ class PhotoCell: UICollectionViewCell {
   @IBOutlet weak var content: UIImageView!
   @IBOutlet weak var flag: UILabel!
   @IBOutlet weak var selectBtn: UIButton!
+  @IBOutlet weak var coverView: UIView!
   
   var type: PhotoType = .normal {
     didSet{
@@ -39,12 +40,18 @@ class PhotoCell: UICollectionViewCell {
     }
   }
   
+  var isCovered: Bool = false
+  
   var isChoosed: Bool  = false{
     didSet{
       if isChoosed {
         selectBtn.tintColor = UIColor.blue
+        coverView.isHidden = true
       }else{
         selectBtn.tintColor = UIColor.lightGray
+        // 是否不可选择状态
+        coverView.isHidden = !isCovered
+//        selectBtn.isUserInteractionEnabled = !isCovered
       }
     }
   }
@@ -56,19 +63,12 @@ class PhotoCell: UICollectionViewCell {
     selectBtn.tintColor = UIColor.lightGray
   }
   
-  func choosed(){
-    UIView.animate(withDuration: 0.3, animations: {
-      
-    }) { b in
-      
-    }
-    selectBtn.tintColor = UIColor.blue
+  func toggle(){
+    isChoosed = !isChoosed
+    self.selectBtn.transform = CGAffineTransform.identity.scaledBy(x: 1.3, y: 1.3)
+    UIView.animate(withDuration: 0.5 , delay: 0 , usingSpringWithDamping: 0.6 , initialSpringVelocity: 20 , options: .curveEaseOut , animations: {
+      self.selectBtn.transform = CGAffineTransform.identity
+    }, completion: nil)
   }
-  
-  func unchoosed(){
-    
-  }
-  
-  
 }
 

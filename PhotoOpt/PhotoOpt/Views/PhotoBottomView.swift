@@ -8,8 +8,15 @@
 
 import UIKit
 
+
+protocol PhotoBottomViewDelegate: class {
+  func photoBottomViewDidComplete(_ view: PhotoBottomView)
+  func photoBottomViewDidPreview(_ view: PhotoBottomView)
+}
+
 class PhotoBottomView: UIView {
   
+  weak var delegate: PhotoBottomViewDelegate?
   let previewBtn: UIButton = {
     let btn = UIButton()
     btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -52,6 +59,29 @@ class PhotoBottomView: UIView {
         commitBtn.bottomAnchor.constraint(equalTo: self.bottomAnchor ) ,
         commitBtn.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10)
       ])
+    
+    commitBtn.addTarget(self, action: #selector(complete), for: .touchUpInside)
+    previewBtn.addTarget(self, action: #selector(preview), for: .touchUpInside)
+  }
+  
+  
+  /// 完成
+  @objc func complete(){
+    delegate?.photoBottomViewDidComplete(self)
+  }
+  
+  /// 预览
+  @objc func preview(){
+    delegate?.photoBottomViewDidPreview(self)
+  }
+  
+  func changeSelectedCount(){
+    let count = SelectedAssetManager.shared.selectedCount
+    if count == 0{
+      commitBtn.setTitle("完成", for: .normal)
+    }else{
+      commitBtn.setTitle("完成（\(count)）", for: .normal)
+    }
   }
 }
 

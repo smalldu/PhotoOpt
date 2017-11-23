@@ -44,12 +44,20 @@
                             <color key="titleColor" red="0.40000000000000002" green="0.83137254900000002" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
+                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4t5-ng-8z4">
+                        <rect key="frame" x="0.0" y="0.0" width="119" height="110"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="zTW-Vh-VwR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2ZD-QU-Q4G"/>
+                <constraint firstAttribute="bottom" secondItem="4t5-ng-8z4" secondAttribute="bottom" id="Kqq-Ul-Zww"/>
+                <constraint firstItem="4t5-ng-8z4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LsD-d6-96S"/>
                 <constraint firstAttribute="bottom" secondItem="zTW-Vh-VwR" secondAttribute="bottom" id="OvN-N8-Hfc"/>
+                <constraint firstAttribute="trailing" secondItem="4t5-ng-8z4" secondAttribute="trailing" id="X4m-Z1-rSP"/>
                 <constraint firstItem="v52-WT-cUa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Zgn-dT-cDr"/>
+                <constraint firstItem="4t5-ng-8z4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dHc-Er-nAZ"/>
                 <constraint firstItem="0Mw-IU-gpG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hw6-3r-UmK"/>
                 <constraint firstAttribute="trailing" secondItem="0Mw-IU-gpG" secondAttribute="trailing" id="nMb-sU-sj5"/>
                 <constraint firstItem="0Mw-IU-gpG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tIC-80-EbN"/>
@@ -60,10 +68,11 @@
             <size key="customSize" width="119" height="110"/>
             <connections>
                 <outlet property="content" destination="0Mw-IU-gpG" id="9wJ-dI-kQw"/>
+                <outlet property="coverView" destination="4t5-ng-8z4" id="CnU-QL-JQq"/>
                 <outlet property="flag" destination="zTW-Vh-VwR" id="U6S-ab-oeR"/>
                 <outlet property="selectBtn" destination="v52-WT-cUa" id="kZO-Ae-342"/>
             </connections>
-            <point key="canvasLocation" x="-304.5" y="79"/>
+            <point key="canvasLocation" x="-386.5" y="38"/>
         </collectionViewCell>
     </objects>
     <resources>

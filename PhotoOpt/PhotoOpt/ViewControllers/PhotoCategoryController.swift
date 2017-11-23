@@ -64,7 +64,6 @@ class PhotoCategoryController: UIViewController {
       }
     }
   }
-  
 }
 
 // MARK: - setup

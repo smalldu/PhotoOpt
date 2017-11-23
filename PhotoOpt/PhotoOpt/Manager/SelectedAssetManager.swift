@@ -12,20 +12,34 @@ import Photos
 class SelectedAssetManager{
   
   static let shared = SelectedAssetManager()
-  var selectedAssets: [PHAsset] = []
+  var items: [AssetItem] = []
   
-  func toggle(_ item: PHAsset) {
-    if selectedAssets.contains(item) {
-      if let index = selectedAssets.index(where: { $0 == item }){
-        selectedAssets.remove(at: index)
+  var selectedCount: Int {
+    return self.items.count
+  }
+  
+  func register(){
+    self.items.removeAll()
+  }
+  
+  func toggle(_ item: PHAsset , image: UIImage?) {
+    let assets = items.map{ $0.asset }
+    if assets.contains(item) {
+      if let index = assets.index(where: { $0 == item }){
+        items.remove(at: index)
       }
     }else{
-      selectedAssets.append(item)
+      // 添加到 Items
+      let assetItem = AssetItem(asset: item)
+      assetItem.image = image
+      assetItem.request()
+      items.append(assetItem)
     }
   }
   
   func contains(_ item: PHAsset) -> Bool{
-    return self.selectedAssets.contains(item)
+    let assets = items.map{ $0.asset }
+    return assets.contains(item)
   }
   
 }
