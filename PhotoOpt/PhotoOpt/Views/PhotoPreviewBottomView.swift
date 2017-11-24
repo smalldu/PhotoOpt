@@ -19,17 +19,17 @@ class PhotoPreviewBottomView: UIView {
   
   let backBtn: UIButton = {
     let btn = UIButton()
-    btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+    btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
     btn.setTitle("返回", for: .normal)
-    btn.setTitleColor(UIColor.blue, for: .normal )
+    btn.setTitleColor(UIColor.black, for: .normal )
     return btn
   }()
   
   let commitBtn: UIButton = {
     let btn = UIButton()
-    btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+    btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
     btn.setTitle("完成", for: .normal)
-    btn.setTitleColor(UIColor.blue, for: .normal )
+    btn.setTitleColor(UIColor.black, for: .normal )
     return btn
   }()
   
@@ -44,7 +44,6 @@ class PhotoPreviewBottomView: UIView {
   }
   
   func prepareView(){
-    self.backgroundColor = UIColor.white
     addSubview(backBtn)
     addSubview(commitBtn)
     backBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -53,8 +52,6 @@ class PhotoPreviewBottomView: UIView {
       backBtn.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10) ,
       backBtn.topAnchor.constraint(equalTo: self.topAnchor) ,
       backBtn.bottomAnchor.constraint(equalTo: self.bottomAnchor ) ,
-      backBtn.widthAnchor.constraint(equalToConstant: 80) ,
-      commitBtn.widthAnchor.constraint(equalToConstant: 80) ,
       commitBtn.topAnchor.constraint(equalTo: self.topAnchor) ,
       commitBtn.bottomAnchor.constraint(equalTo: self.bottomAnchor ) ,
       commitBtn.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10)
@@ -72,4 +69,12 @@ class PhotoPreviewBottomView: UIView {
     delegate?.photoPreviewBottomViewDidBack(self)
   }
   
+  func changeSelectedCount(){
+    let count = SelectedAssetManager.shared.selectedCount
+    if count == 0{
+      commitBtn.setTitle("完成", for: .normal)
+    }else{
+      commitBtn.setTitle("完成（\(count)）", for: .normal)
+    }
+  }
 }

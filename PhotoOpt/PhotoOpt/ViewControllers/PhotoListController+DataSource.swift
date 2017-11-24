@@ -30,6 +30,7 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
     cell.isCovered = SelectedAssetManager.shared.selectedCount >= maxSelectedCount 
     cell.isChoosed = SelectedAssetManager.shared.contains(asset)
     cell.representedAssetIdentifier = asset.localIdentifier
+    cell.delegate = self
     imageManager.requestImage(for: asset , targetSize: self.thumbnailSize , contentMode: .aspectFill , options: nil) { (image, info ) in
       if cell.representedAssetIdentifier == asset.localIdentifier && image != nil {
         cell.thumbnailImage = image
@@ -39,22 +40,12 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard let asset = self.category?.result?.object(at: indexPath.item) else { return }
-    guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else { return }
-    
-    if SelectedAssetManager.shared.selectedCount == maxSelectedCount - 1 && !SelectedAssetManager.shared.contains(asset) {
-      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
-      collectionView.reloadData()
-    }else if SelectedAssetManager.shared.selectedCount == maxSelectedCount && SelectedAssetManager.shared.contains(asset){
-      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
-      collectionView.reloadData()
-    }else if SelectedAssetManager.shared.selectedCount == maxSelectedCount &&  !SelectedAssetManager.shared.contains(asset) {
-      return
-    }else{
-      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
+    if let result = self.category?.result {
+      let previewController = PreviewController(result: result,maxCount:self.maxSelectedCount)
+      previewController.listController = self
+      previewController.indexPath = indexPath
+      self.navigationController?.pushViewController(previewController, animated: true)
     }
-    cell.toggle()
-    self.btmView.changeSelectedCount()
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

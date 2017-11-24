@@ -13,10 +13,16 @@ enum PhotoType: String {
   case gif = "Gif"
   case normal
 }
+
+protocol PhotoCellDelegate: class {
+  func photoCellDidChoose(_ cell: PhotoCell)
+}
+
 class PhotoCell: UICollectionViewCell {
   
   static let reuseID = "\(PhotoCell.self)"
   var representedAssetIdentifier: String = ""
+  weak var delegate: PhotoCellDelegate?
   
   @IBOutlet weak var content: UIImageView!
   @IBOutlet weak var flag: UILabel!
@@ -47,11 +53,12 @@ class PhotoCell: UICollectionViewCell {
       if isChoosed {
         selectBtn.tintColor = UIColor.blue
         coverView.isHidden = true
+        selectBtn.isUserInteractionEnabled = true
       }else{
         selectBtn.tintColor = UIColor.lightGray
         // 是否不可选择状态
         coverView.isHidden = !isCovered
-//        selectBtn.isUserInteractionEnabled = !isCovered
+        selectBtn.isUserInteractionEnabled = !isCovered
       }
     }
   }
@@ -60,7 +67,12 @@ class PhotoCell: UICollectionViewCell {
     super.awakeFromNib()
     content.contentMode = .scaleAspectFill
     content.clipsToBounds = true
-    selectBtn.tintColor = UIColor.lightGray
+    selectBtn.tintColor = .lightGray
+    selectBtn.addTarget(self, action: #selector(selectBtnClick), for: .touchUpInside)
+  }
+  
+  @objc func selectBtnClick(){
+    delegate?.photoCellDidChoose(self)
   }
   
   func toggle(){

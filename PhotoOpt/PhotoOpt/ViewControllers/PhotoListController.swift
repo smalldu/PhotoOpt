@@ -111,6 +111,8 @@ class PhotoListController: UIViewController {
     super.viewWillAppear(animated)
     updateItemSize()
     self.navigationController?.setNavigationBarHidden(false, animated: true)
+    self.collectionView.reloadData()
+    self.btmView.changeSelectedCount()
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)

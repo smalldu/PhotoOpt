@@ -11,12 +11,17 @@ import Photos
 
 class PreviewController: UIViewController {
   
-  let result:PHFetchResult<PHAsset>
-  init(result:PHFetchResult<PHAsset>) {
+  let result: PHFetchResult<PHAsset>
+  let maxCount: Int
+  var indexPath: IndexPath?
+  init(result:PHFetchResult<PHAsset>,maxCount: Int) {
     self.result = result
+    self.maxCount = maxCount
     super.init(nibName: nil, bundle: nil)
   }
   
+  weak var listController: PhotoListController?
+  private var animating = false
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -25,7 +30,7 @@ class PreviewController: UIViewController {
   
   lazy var btmView: PhotoPreviewBottomView = {
     let view = PhotoPreviewBottomView()
-    view.backgroundColor = UIColor.cf8f8f8
+    view.backgroundColor = UIColor.cf8f8f8.withAlphaComponent(0.8)
     return view
   }()
   
@@ -49,6 +54,18 @@ class PreviewController: UIViewController {
     return cv
   }()
   
+  let tipLabel: UILabel = {
+    let label = UILabel()
+    label.backgroundColor = UIColor.white
+    label.textColor = UIColor.cf24638
+    label.font = UIFont.systemFont(ofSize: 13)
+    label.textAlignment = .center
+    label.layer.cornerRadius = 4
+    label.layer.masksToBounds = true
+    return label
+  }()
+  
+  
   var thumbnailSize: CGSize = .zero
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,12 +78,20 @@ class PreviewController: UIViewController {
     collectionView.delegate = self
     collectionView.dataSource = self
     btmView.translatesAutoresizingMaskIntoConstraints = false
+    btmView.changeSelectedCount()
+    
     NSLayoutConstraint.activate([
       btmView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor) ,
       btmView.leftAnchor.constraint(equalTo: self.view.leftAnchor) ,
       btmView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
       btmView.heightAnchor.constraint(equalToConstant: 49)
     ])
+    
+    view.addSubview(tipLabel)
+    view.addConstraintsWith(formart: "H:|-15-[v0]-15-|", views: tipLabel)
+    view.addConstraintsWith(formart: "V:|-10-[v0(40)]|", views: tipLabel)
+    tipLabel.text = "最多只能选择\(maxCount)张照片"
+    tipLabel.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -60)
   }
   
   override var prefersStatusBarHidden: Bool {
@@ -76,6 +101,9 @@ class PreviewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.setNavigationBarHidden(true, animated: false)
+    if let indexPath = indexPath{
+      collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+    }
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -83,7 +111,6 @@ class PreviewController: UIViewController {
     self.navigationController?.setNavigationBarHidden(false, animated: true)
   }
 }
-
 
 
 // MARK: - UICollectionViewDataSource,UICollectionViewDelegate
@@ -117,17 +144,42 @@ extension PreviewController: UICollectionViewDataSource,UICollectionViewDelegate
 extension PreviewController: PhotoPreviewBottomDelegate , PhotoPreviewCellDelegate{
   
   func photoPreviewDidToggle(_ cell: PhotoPreviewCell) {
-    // FIXME: max count
     guard let indexPath = collectionView.indexPath(for: cell) else { return }
     let asset = result.object(at: indexPath.row)
-    SelectedAssetManager.shared.toggle(asset, image: cell.thumbnailImage)
+    if SelectedAssetManager.shared.selectedCount == self.maxCount &&  !SelectedAssetManager.shared.contains(asset) {
+      if animating {
+        return
+      }
+      animating = true
+      // 超过限制
+      UIView.animate(withDuration: 0.4 , delay: 0 , options:.curveEaseIn , animations: {
+         self.tipLabel.transform = CGAffineTransform.identity
+      }, completion: { _ in
+        UIView.animate(withDuration: 0.4 , delay: 0.8 , options: .curveEaseOut , animations: {
+          self.tipLabel.transform = CGAffineTransform.identity.translatedBy(x: 0, y: -60)
+        }, completion: { _ in
+          self.animating = false
+        })
+      })
+      return
+    }else{
+      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
+    }
     cell.toggle()
+    btmView.changeSelectedCount()
+    
+    //XIANZHI
   }
   
   func photoPreviewBottomViewDidBack(_ view: PhotoPreviewBottomView) {
     self.navigationController?.popViewController(animated: true)
   }
+  /// 点击完成
   func photoPreviewBottomViewDidComplete(_ view: PhotoPreviewBottomView) {
+    self.navigationController?.dismiss(animated: true, completion: { [weak self] in
+      guard let `self` = self else{ return }
+      self.listController?.complete?(SelectedAssetManager.shared.items)
+    })
   }
   
 }
