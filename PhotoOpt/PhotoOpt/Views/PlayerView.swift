@@ -13,6 +13,30 @@ protocol PlayerViewDelegate: class {
   func livePlayDidFinish(_ view: PlayerView)
 }
 
+
+class Player {
+  static let shared = Player()
+  var maxCount: Int = 5 // 最大12个元素
+  var currentIndex: Int = 0
+  var playerPool: [AVPlayer] = []
+  
+  func player()->AVPlayer{
+    if playerPool.count < maxCount {
+      let avplayer = AVPlayer()
+      playerPool.append(avplayer)
+    }
+    let index = currentIndex
+    if currentIndex == maxCount - 1{
+      currentIndex = 0
+    }
+    currentIndex += 1
+    return playerPool[index]
+  }
+  
+  
+}
+
+var count = 0
 class PlayerView: UIView {
   
   weak var delegate: PlayerViewDelegate?
@@ -38,17 +62,24 @@ class PlayerView: UIView {
   var url: URL?
   
   func configWithURL(_ url: URL) {
-    if avItem?.status == .readyToPlay {
-      return
-    }
-    if let playerLayer = self.layer as? AVPlayerLayer{
-      self.url = url
-      avItem = AVPlayerItem(url: url)
-      avplayer = AVPlayer(playerItem: avItem)
-      playerLayer.player = avplayer
-      playerLayer.videoGravity = .resizeAspectFill
-      playerLayer.contentsScale = UIScreen.main.scale
-    }
+//    if url.absoluteString == (self.url?.absoluteString ?? ""){
+//      return
+//    }
+    self.url = url
+    self.avItem = AVPlayerItem(url: url)
+//    if let playerLayer = self.layer as? AVPlayerLayer{
+//      DispatchQueue.global(qos: .background).async {
+//        self.url = url
+//        self.avItem = AVPlayerItem(url: url)
+//        self.avplayer = Player.shared.player()
+//        self.avplayer?.replaceCurrentItem(with: self.avItem)
+//        DispatchQueue.main.async {
+//          playerLayer.player = self.avplayer
+//          playerLayer.videoGravity = .resizeAspectFill
+//          playerLayer.contentsScale = UIScreen.main.scale
+//        }
+//      }
+//    }
   }
   
   @objc func didFinishPlay(_ notification: NSNotification){
@@ -62,18 +93,24 @@ class PlayerView: UIView {
   }
   
   func play(){
-    guard let item = self.avItem else {
-      print("item is nil")
-      return
-    }
-    if item.status == .readyToPlay {
-      // 可以播放的状态
+    if let playerLayer = self.layer as? AVPlayerLayer{
+      if self.avplayer == nil {
+        self.avplayer = Player.shared.player()
+      }
+      if self.avplayer?.currentItem != avItem {
+        self.avplayer?.replaceCurrentItem(with: avItem!)
+      }
+      CATransaction.begin()
+      CATransaction.setDisableActions(true)
+      playerLayer.player = avplayer
+      playerLayer.videoGravity = .resizeAspectFill
+      playerLayer.contentsScale = UIScreen.main.scale
+      CATransaction.commit()
+      
       avplayer?.play()
-    }else{
-      print("状态异常 -- \(item.status) --")
-      print(self.url?.absoluteString)
     }
   }
+  
   
   deinit {
     NotificationCenter.default.removeObserver(self)

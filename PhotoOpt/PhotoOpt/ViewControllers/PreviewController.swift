@@ -27,6 +27,8 @@ class PreviewController: UIViewController {
   }
   lazy var fileManager = FileManager()
   let imageManager = PHCachingImageManager()
+  var photoCache: [PHAsset: PhotoListCache] = [:]
+  
   
   lazy var btmView: PhotoPreviewBottomView = {
     let view = PhotoPreviewBottomView()
@@ -132,47 +134,60 @@ extension PreviewController: UICollectionViewDataSource,UICollectionViewDelegate
     
     cell.representedAssetIdentifier = asset.localIdentifier
     cell.isChoosed = SelectedAssetManager.shared.contains(asset)
-    imageManager.requestImage(for: asset , targetSize: self.thumbnailSize , contentMode: .aspectFill , options: nil) { (image, info ) in
-      if cell.representedAssetIdentifier == asset.localIdentifier && image != nil {
+    cell.delegate = self
+    if photoCache[asset] == nil {
+      photoCache[asset] = PhotoListCache()
+    }
+    if let image = photoCache[asset]?.image{
+      // 从缓存中获取
+      if cell.representedAssetIdentifier == asset.localIdentifier{
         cell.thumbnailImage = image
       }
+    }else{
+      imageManager.requestImage(for: asset , targetSize: self.thumbnailSize , contentMode: .aspectFill , options: nil) { (image, info ) in
+        if cell.representedAssetIdentifier == asset.localIdentifier && image != nil {
+          self.photoCache[asset]?.image = image
+          cell.thumbnailImage = image
+        }
+      }
     }
-    cell.delegate = self
-    
     if cell.type == .live {
-      self.imageManager.requestLivePhoto(for: asset, targetSize: self.thumbnailSize, contentMode: .aspectFill, options: nil, resultHandler: { [weak self] (livePhoto, info) in
-        guard let `self` = self else{ return }
-        // live photo
-        if let livePhoto = livePhoto{
-          let assetResources = PHAssetResource.assetResources(for: livePhoto)
-          for item in assetResources{
-            print("\(item.originalFilename) , \(item.type)")
-            if item.originalFilename.lowercased().contains(".mov"){
-              // 保存到缓存目录
-              let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-              let path = (paths.first ?? "") + "/\(item.originalFilename)"
-              let url = URL(fileURLWithPath: path)
-              if self.fileManager.fileExists(atPath: path){
-                if cell.representedAssetIdentifier == asset.localIdentifier{
+      if let url = photoCache[asset]?.movURL {
+        cell.movURL = url
+      }else{
+        self.imageManager.requestLivePhoto(for: asset, targetSize: self.thumbnailSize, contentMode: .aspectFill, options: nil, resultHandler: { [weak self] (livePhoto, info) in
+          guard let `self` = self else{ return }
+          // live photo
+          if let livePhoto = livePhoto{
+            let assetResources = PHAssetResource.assetResources(for: livePhoto)
+            for item in assetResources{
+              print("\(item.originalFilename) , \(item.type)")
+              if item.originalFilename.lowercased().contains(".mov"){
+                // 保存到缓存目录
+                let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+                let path = (paths.first ?? "") + "/\(item.originalFilename)"
+                let url = URL(fileURLWithPath: path)
+                if self.fileManager.fileExists(atPath: path){
                   DispatchQueue.main.async {
+                    self.photoCache[asset]?.movURL = url
                     cell.movURL = url
                   }
-                }
-              }else{
-                PHAssetResourceManager.default().writeData(for: item, toFile: url, options: nil, completionHandler: { (error) in
-                  if error == nil {
-                    if cell.representedAssetIdentifier == asset.localIdentifier{
+                }else{
+                  PHAssetResourceManager.default().writeData(for: item, toFile: url, options: nil, completionHandler: { [weak self] (error) in
+                    guard let `self` = self else{ return }
+                    if error == nil {
                       DispatchQueue.main.async {
+                        self.photoCache[asset]?.movURL = url
                         cell.movURL = url
                       }
                     }
-                  }
-                })
+                  })
+                }
               }
             }
           }
-        }
-      })
+        })
+      }
     }
     
     return cell
