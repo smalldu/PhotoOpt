@@ -13,7 +13,7 @@ import AVFoundation
 // MARK: - UICollectionViewDataSource,UICollectionViewDelegate
 
 extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelegate {
-  
+  //implements UICollectionViewDelegate
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath) as! PhotoCell
     guard let asset = self.category?.result?.object(at: indexPath.item) else { return UICollectionViewCell() }
