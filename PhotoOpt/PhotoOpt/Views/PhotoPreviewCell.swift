@@ -20,6 +20,23 @@ class PhotoPreviewCell: UICollectionViewCell {
   @IBOutlet weak var content: UIImageView!
   @IBOutlet weak var selectBtn: UIButton!
   @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet weak var playerView: PlayerView!
+  @IBOutlet weak var liveButton: UIButton!
+  
+  var type: PhotoType = .normal {
+    didSet{
+      liveButton.isHidden = type != .live
+      if type != .live{
+        playerView.isHidden = true
+      }
+//      if type == .normal {
+//        flag.isHidden = true
+//      } else {
+//        flag.isHidden = false
+//        flag.text = type.rawValue
+//      }
+    }
+  }
   
   var thumbnailImage: UIImage? {
     didSet {
@@ -36,8 +53,16 @@ class PhotoPreviewCell: UICollectionViewCell {
       }
     }
   }
+  var movURL: URL? {
+    didSet{
+      if let url = movURL{
+        playerView.configWithURL(url)
+      }
+    }
+  }
   override func awakeFromNib() {
     super.awakeFromNib()
+    playerView.isHidden = true
     scrollView.maximumZoomScale = 3.0
     scrollView.minimumZoomScale = 1.0
     scrollView.delegate = self
@@ -48,6 +73,8 @@ class PhotoPreviewCell: UICollectionViewCell {
     self.content.isUserInteractionEnabled = true
     
     selectBtn.addTarget(self, action: #selector(selectButtonClick), for: .touchUpInside)
+    liveButton.addTarget(self, action: #selector(playLive), for: .touchUpInside)
+    playerView.delegate = self
   }
   
   @objc func doubleTapImg(){
@@ -66,6 +93,11 @@ class PhotoPreviewCell: UICollectionViewCell {
     delegate?.photoPreviewDidToggle(self)
   }
   
+  @objc func playLive(){
+    playerView.isHidden = false
+    playerView.play()
+  }
+  
   func toggle(){
     isChoosed = !isChoosed
     self.selectBtn.transform = CGAffineTransform.identity.scaledBy(x: 1.3, y: 1.3)
@@ -73,7 +105,6 @@ class PhotoPreviewCell: UICollectionViewCell {
       self.selectBtn.transform = CGAffineTransform.identity
     }, completion: nil)
   }
-  
 }
 
 
@@ -87,6 +118,17 @@ extension PhotoPreviewCell: UIScrollViewDelegate {
 
 
 
+
+
+extension PhotoPreviewCell: PlayerViewDelegate{
+  
+  func livePlayDidFinish(_ view: PlayerView) {
+    if playerView.isHidden == false{
+      playerView.isHidden = true
+    }
+  }
+  
+}
 
 
 

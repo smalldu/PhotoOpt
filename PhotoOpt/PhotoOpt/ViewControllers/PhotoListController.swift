@@ -12,12 +12,22 @@ import Photos
 let sw: CGFloat = UIScreen.main.bounds.width
 let sh: CGFloat = UIScreen.main.bounds.height
 
+
+struct PhotoListCache {
+  var image: UIImage?
+  var movData: Data?
+  var movURL: URL?
+  var gifData: Data?
+}
+
 class PhotoListController: UIViewController {
   
   enum State {
     case modeling // 正在 选择相册
     case normal
   }
+  
+  var photoCache: [PHAsset: PhotoListCache] = [:]
   
   /// 最大可选择数量
   public var maxSelectedCount: Int = 9
@@ -52,7 +62,7 @@ class PhotoListController: UIViewController {
     cv.alwaysBounceVertical = true
     return cv
   }()
-  
+  lazy var fileManager = FileManager()
   let assetManager = AssetManager()
   let imageManager = PHCachingImageManager()
   var thumbnailSize: CGSize = CGSize.zero

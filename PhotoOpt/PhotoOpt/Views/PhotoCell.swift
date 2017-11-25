@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 enum PhotoType: String {
   case live = "Live"
@@ -28,9 +29,15 @@ class PhotoCell: UICollectionViewCell {
   @IBOutlet weak var flag: UILabel!
   @IBOutlet weak var selectBtn: UIButton!
   @IBOutlet weak var coverView: UIView!
+  @IBOutlet weak var playerView: PlayerView!
+  @IBOutlet weak var liveButton: UIButton!
   
   var type: PhotoType = .normal {
     didSet{
+      liveButton.isHidden = type != .live
+      if type != .live{
+        playerView.isHidden = true
+      }
       if type == .normal {
         flag.isHidden = true
       } else {
@@ -45,8 +52,15 @@ class PhotoCell: UICollectionViewCell {
       content.image = thumbnailImage
     }
   }
-  
   var isCovered: Bool = false
+  var movURL: URL? {
+    didSet{
+      if let url = movURL{
+        playerView.configWithURL(url)
+      }
+    }
+  }
+  
   
   var isChoosed: Bool  = false{
     didSet{
@@ -65,14 +79,24 @@ class PhotoCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    playerView.isHidden = true
+    coverView.isUserInteractionEnabled = true
     content.contentMode = .scaleAspectFill
     content.clipsToBounds = true
     selectBtn.tintColor = .lightGray
     selectBtn.addTarget(self, action: #selector(selectBtnClick), for: .touchUpInside)
+    liveButton.addTarget(self, action: #selector(playLive), for: .touchUpInside)
+    playerView.delegate = self
   }
+  
   
   @objc func selectBtnClick(){
     delegate?.photoCellDidChoose(self)
+  }
+  
+  @objc func playLive(){
+    playerView.isHidden = false
+    playerView.play()
   }
   
   func toggle(){
@@ -83,4 +107,31 @@ class PhotoCell: UICollectionViewCell {
     }, completion: nil)
   }
 }
+
+
+extension PhotoCell: PlayerViewDelegate{
+  
+  func livePlayDidFinish(_ view: PlayerView) {
+    if playerView.isHidden == false{
+      playerView.isHidden = true
+    }
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

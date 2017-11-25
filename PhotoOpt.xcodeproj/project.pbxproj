@@ -11,6 +11,7 @@
 		2051CC4E1FC6CE680055971F /* PhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2051CC4C1FC6CE680055971F /* PhotoPreviewCell.swift */; };
 		2051CC4F1FC6CE680055971F /* PhotoPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2051CC4D1FC6CE680055971F /* PhotoPreviewCell.xib */; };
 		2051CC511FC6D72E0055971F /* PhotoPreviewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2051CC501FC6D72E0055971F /* PhotoPreviewBottomView.swift */; };
+		206C15661FC949FA0029593E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C15651FC949FA0029593E /* PlayerView.swift */; };
 		20C3F6951FBEC1A80062AB0C /* UIColor+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */; };
 		20C3F6971FBEE04E0062AB0C /* SelectedAssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */; };
 		20C3F7431FC6C35A0062AB0C /* PhotoListController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F7421FC6C35A0062AB0C /* PhotoListController+Delegate.swift */; };
@@ -59,6 +60,7 @@
 		2051CC4C1FC6CE680055971F /* PhotoPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewCell.swift; sourceTree = "<group>"; };
 		2051CC4D1FC6CE680055971F /* PhotoPreviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPreviewCell.xib; sourceTree = "<group>"; };
 		2051CC501FC6D72E0055971F /* PhotoPreviewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewBottomView.swift; sourceTree = "<group>"; };
+		206C15651FC949FA0029593E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+exts.swift"; sourceTree = "<group>"; };
 		20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAssetManager.swift; sourceTree = "<group>"; };
 		20C3F7421FC6C35A0062AB0C /* PhotoListController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoListController+Delegate.swift"; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				2051CC4C1FC6CE680055971F /* PhotoPreviewCell.swift */,
 				2051CC4D1FC6CE680055971F /* PhotoPreviewCell.xib */,
 				2051CC501FC6D72E0055971F /* PhotoPreviewBottomView.swift */,
+				206C15651FC949FA0029593E /* PlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				20EDCB161FAC435D0009C4C1 /* ViewController.swift in Sources */,
 				20EDCB8B1FAD60BC0009C4C1 /* PhotoCategoryCell.swift in Sources */,
 				20C3F7431FC6C35A0062AB0C /* PhotoListController+Delegate.swift in Sources */,
+				206C15661FC949FA0029593E /* PlayerView.swift in Sources */,
 				20EDCB8E1FADC92D0009C4C1 /* AssetItem.swift in Sources */,
 				20EDCB841FAC7CAE0009C4C1 /* PhotoBottomView.swift in Sources */,
 				20EDCB471FAC4FE70009C4C1 /* PhotoListController.swift in Sources */,
@@ -553,7 +557,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY748RT68A;
 				INFOPLIST_FILE = PhotoOpt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = im.zuber.app.PhotoOpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -569,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KY748RT68A;
 				INFOPLIST_FILE = PhotoOpt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = im.zuber.app.PhotoOpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";

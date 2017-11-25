@@ -25,7 +25,7 @@ class PreviewController: UIViewController {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+  lazy var fileManager = FileManager()
   let imageManager = PHCachingImageManager()
   
   lazy var btmView: PhotoPreviewBottomView = {
@@ -120,6 +120,16 @@ extension PreviewController: UICollectionViewDataSource,UICollectionViewDelegate
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoPreviewCell.reuseID, for: indexPath) as! PhotoPreviewCell
     let asset = result.object(at: indexPath.row)
+    
+    if asset.mediaSubtypes.contains(.photoLive) {
+      // Live
+      cell.type = .live
+    }else if asset.isGIF {
+      cell.type = .gif
+    }else{
+      cell.type = .normal
+    }
+    
     cell.representedAssetIdentifier = asset.localIdentifier
     cell.isChoosed = SelectedAssetManager.shared.contains(asset)
     imageManager.requestImage(for: asset , targetSize: self.thumbnailSize , contentMode: .aspectFill , options: nil) { (image, info ) in
@@ -128,6 +138,43 @@ extension PreviewController: UICollectionViewDataSource,UICollectionViewDelegate
       }
     }
     cell.delegate = self
+    
+    if cell.type == .live {
+      self.imageManager.requestLivePhoto(for: asset, targetSize: self.thumbnailSize, contentMode: .aspectFill, options: nil, resultHandler: { [weak self] (livePhoto, info) in
+        guard let `self` = self else{ return }
+        // live photo
+        if let livePhoto = livePhoto{
+          let assetResources = PHAssetResource.assetResources(for: livePhoto)
+          for item in assetResources{
+            print("\(item.originalFilename) , \(item.type)")
+            if item.originalFilename.lowercased().contains(".mov"){
+              // 保存到缓存目录
+              let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+              let path = (paths.first ?? "") + "/\(item.originalFilename)"
+              let url = URL(fileURLWithPath: path)
+              if self.fileManager.fileExists(atPath: path){
+                if cell.representedAssetIdentifier == asset.localIdentifier{
+                  DispatchQueue.main.async {
+                    cell.movURL = url
+                  }
+                }
+              }else{
+                PHAssetResourceManager.default().writeData(for: item, toFile: url, options: nil, completionHandler: { (error) in
+                  if error == nil {
+                    if cell.representedAssetIdentifier == asset.localIdentifier{
+                      DispatchQueue.main.async {
+                        cell.movURL = url
+                      }
+                    }
+                  }
+                })
+              }
+            }
+          }
+        }
+      })
+    }
+    
     return cell
   }
   
@@ -167,8 +214,6 @@ extension PreviewController: PhotoPreviewBottomDelegate , PhotoPreviewCellDelega
     }
     cell.toggle()
     btmView.changeSelectedCount()
-    
-    //XIANZHI
   }
   
   func photoPreviewBottomViewDidBack(_ view: PhotoPreviewBottomView) {

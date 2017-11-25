@@ -35,6 +35,13 @@
                             <constraint firstItem="vOQ-jt-flA" firstAttribute="width" secondItem="mMc-bc-IAg" secondAttribute="width" id="yIH-zF-W69"/>
                         </constraints>
                     </scrollView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfW-Sg-xCH" customClass="PlayerView" customModule="PhotoOpt" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="226" height="387"/>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36X-fz-NHv">
+                        <rect key="frame" x="97" y="182" width="32" height="22"/>
+                        <state key="normal" image="live"/>
+                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCd-fv-6KX">
                         <rect key="frame" x="186" y="15" width="25" height="25"/>
                         <constraints>
@@ -46,17 +53,25 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="EfW-Sg-xCH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BKb-P2-Yp4"/>
+                <constraint firstItem="36X-fz-NHv" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="DSS-YZ-T5R"/>
                 <constraint firstItem="mMc-bc-IAg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JxF-cK-aGO"/>
+                <constraint firstAttribute="bottom" secondItem="EfW-Sg-xCH" secondAttribute="bottom" id="OmF-x2-hi9"/>
                 <constraint firstItem="BCd-fv-6KX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="PG6-wI-Hl4"/>
                 <constraint firstAttribute="trailing" secondItem="BCd-fv-6KX" secondAttribute="trailing" constant="15" id="bsv-OF-3Ra"/>
                 <constraint firstItem="mMc-bc-IAg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fc1-z9-XDP"/>
                 <constraint firstAttribute="trailing" secondItem="mMc-bc-IAg" secondAttribute="trailing" id="lvc-Pn-fpR"/>
+                <constraint firstItem="36X-fz-NHv" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="p11-Dg-TQC"/>
+                <constraint firstItem="EfW-Sg-xCH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rSx-KN-i7K"/>
                 <constraint firstAttribute="bottom" secondItem="mMc-bc-IAg" secondAttribute="bottom" id="yJJ-nI-vhM"/>
+                <constraint firstAttribute="trailing" secondItem="EfW-Sg-xCH" secondAttribute="trailing" id="zcl-db-NrR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="226" height="387"/>
             <connections>
                 <outlet property="content" destination="vOQ-jt-flA" id="QaQ-3l-P7W"/>
+                <outlet property="liveButton" destination="36X-fz-NHv" id="hBP-ft-YVf"/>
+                <outlet property="playerView" destination="EfW-Sg-xCH" id="WrB-oK-Q67"/>
                 <outlet property="scrollView" destination="mMc-bc-IAg" id="FZ3-uN-FeZ"/>
                 <outlet property="selectBtn" destination="BCd-fv-6KX" id="Or9-tv-ZFJ"/>
             </connections>
@@ -64,6 +79,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="live" width="32" height="22"/>
         <image name="selected" width="200" height="200"/>
     </resources>
 </document>

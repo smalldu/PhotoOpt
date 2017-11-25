@@ -22,6 +22,13 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Mw-IU-gpG">
                         <rect key="frame" x="0.0" y="0.0" width="119" height="110"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6U-mO-CIX" customClass="PlayerView" customModule="PhotoOpt" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="119" height="110"/>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SjF-3y-OJG">
+                        <rect key="frame" x="42" y="37" width="35" height="35"/>
+                        <state key="normal" image="live"/>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GIF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTW-Vh-VwR">
                         <rect key="frame" x="0.0" y="92" width="30" height="18"/>
                         <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,15 +59,21 @@
             </view>
             <constraints>
                 <constraint firstItem="zTW-Vh-VwR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2ZD-QU-Q4G"/>
+                <constraint firstItem="SjF-3y-OJG" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="3Uq-FQ-EcY"/>
                 <constraint firstAttribute="bottom" secondItem="4t5-ng-8z4" secondAttribute="bottom" id="Kqq-Ul-Zww"/>
+                <constraint firstItem="SjF-3y-OJG" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Ksy-QO-bTy"/>
                 <constraint firstItem="4t5-ng-8z4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LsD-d6-96S"/>
                 <constraint firstAttribute="bottom" secondItem="zTW-Vh-VwR" secondAttribute="bottom" id="OvN-N8-Hfc"/>
+                <constraint firstAttribute="bottom" secondItem="h6U-mO-CIX" secondAttribute="bottom" id="Rvk-xH-4Fe"/>
                 <constraint firstAttribute="trailing" secondItem="4t5-ng-8z4" secondAttribute="trailing" id="X4m-Z1-rSP"/>
                 <constraint firstItem="v52-WT-cUa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Zgn-dT-cDr"/>
                 <constraint firstItem="4t5-ng-8z4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dHc-Er-nAZ"/>
                 <constraint firstItem="0Mw-IU-gpG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hw6-3r-UmK"/>
+                <constraint firstAttribute="trailing" secondItem="h6U-mO-CIX" secondAttribute="trailing" id="kY8-uv-d0Q"/>
                 <constraint firstAttribute="trailing" secondItem="0Mw-IU-gpG" secondAttribute="trailing" id="nMb-sU-sj5"/>
+                <constraint firstItem="h6U-mO-CIX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pQG-e2-ifa"/>
                 <constraint firstItem="0Mw-IU-gpG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tIC-80-EbN"/>
+                <constraint firstItem="h6U-mO-CIX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="uCX-7I-heF"/>
                 <constraint firstAttribute="trailing" secondItem="v52-WT-cUa" secondAttribute="trailing" constant="5" id="ubM-O2-947"/>
                 <constraint firstAttribute="bottom" secondItem="0Mw-IU-gpG" secondAttribute="bottom" id="xsZ-i2-gzY"/>
             </constraints>
@@ -70,12 +83,15 @@
                 <outlet property="content" destination="0Mw-IU-gpG" id="9wJ-dI-kQw"/>
                 <outlet property="coverView" destination="4t5-ng-8z4" id="CnU-QL-JQq"/>
                 <outlet property="flag" destination="zTW-Vh-VwR" id="U6S-ab-oeR"/>
+                <outlet property="liveButton" destination="SjF-3y-OJG" id="rtH-0Z-uEA"/>
+                <outlet property="playerView" destination="h6U-mO-CIX" id="vA1-wu-Y1N"/>
                 <outlet property="selectBtn" destination="v52-WT-cUa" id="kZO-Ae-342"/>
             </connections>
             <point key="canvasLocation" x="-386.5" y="38"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="live" width="35" height="35"/>
         <image name="selected" width="200" height="200"/>
     </resources>
 </document>
