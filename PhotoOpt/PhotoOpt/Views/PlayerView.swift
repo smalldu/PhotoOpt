@@ -11,35 +11,40 @@ import AVFoundation
 
 protocol PlayerViewDelegate: class {
   func livePlayDidFinish(_ view: PlayerView)
+  func livePlayDidStop(_ view: PlayerView)
+  func livePlayDidBegin(_ view: PlayerView)
 }
 
-
+// TODO: - 结束要销毁
 class Player {
   static let shared = Player()
+  var currentPlayer: AVPlayer?
   var maxCount: Int = 5 // 最大12个元素
   var currentIndex: Int = 0
   var playerPool: [AVPlayer] = []
   
   func player()->AVPlayer{
-    if playerPool.count < maxCount {
+    currentPlayer?.pause()
+    if currentPlayer == nil {
       let avplayer = AVPlayer()
-      playerPool.append(avplayer)
+      currentPlayer = avplayer
     }
-    let index = currentIndex
-    if currentIndex == maxCount - 1{
-      currentIndex = 0
-    }
-    currentIndex += 1
-    return playerPool[index]
+//    if playerPool.count < maxCount {
+//      playerPool.append(avplayer)
+//    }
+//    let index = currentIndex
+//    if currentIndex == maxCount - 1{
+//      currentIndex = 0
+//    }
+//    currentIndex += 1
+    return currentPlayer!
   }
-  
-  
 }
 
-var count = 0
 class PlayerView: UIView {
   
   weak var delegate: PlayerViewDelegate?
+  var isFillContent = true
   var avplayer: AVPlayer?
   var avItem: AVPlayerItem?
   override class var layerClass: AnyClass {
@@ -58,28 +63,17 @@ class PlayerView: UIView {
   
   func prepareView(){
     NotificationCenter.default.addObserver(self, selector: #selector(didFinishPlay(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime , object: avItem)
+    NotificationCenter.default.addObserver(self, selector: #selector(stopPlay(_:)), name: NSNotification.Name.kStopPlay , object: avItem)
   }
   var url: URL?
   
   func configWithURL(_ url: URL) {
-//    if url.absoluteString == (self.url?.absoluteString ?? ""){
-//      return
-//    }
     self.url = url
     self.avItem = AVPlayerItem(url: url)
-//    if let playerLayer = self.layer as? AVPlayerLayer{
-//      DispatchQueue.global(qos: .background).async {
-//        self.url = url
-//        self.avItem = AVPlayerItem(url: url)
-//        self.avplayer = Player.shared.player()
-//        self.avplayer?.replaceCurrentItem(with: self.avItem)
-//        DispatchQueue.main.async {
-//          playerLayer.player = self.avplayer
-//          playerLayer.videoGravity = .resizeAspectFill
-//          playerLayer.contentsScale = UIScreen.main.scale
-//        }
-//      }
-//    }
+  }
+  @objc func stopPlay(_ notification: NSNotification){
+    // 结束播放
+    delegate?.livePlayDidStop(self)
   }
   
   @objc func didFinishPlay(_ notification: NSNotification){
@@ -92,25 +86,36 @@ class PlayerView: UIView {
     }
   }
   
-  func play(){
+  func play() {
     if let playerLayer = self.layer as? AVPlayerLayer{
+      avItem?.seek(to: kCMTimeZero)
       if self.avplayer == nil {
         self.avplayer = Player.shared.player()
       }
       if self.avplayer?.currentItem != avItem {
         self.avplayer?.replaceCurrentItem(with: avItem!)
       }
+      // 停止所有播放
+      NotificationCenter.default.post(name: NSNotification.Name.kStopPlay, object: nil)
       CATransaction.begin()
       CATransaction.setDisableActions(true)
       playerLayer.player = avplayer
-      playerLayer.videoGravity = .resizeAspectFill
+      if isFillContent {
+        playerLayer.videoGravity = .resizeAspectFill
+      }else{
+        playerLayer.videoGravity = .resizeAspect
+      }
       playerLayer.contentsScale = UIScreen.main.scale
       CATransaction.commit()
-      
       avplayer?.play()
+//      Double(Int64(time * Double(NSEC_PER_SEC))
+      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1 , execute: { [weak self] in
+        guard let `self` = self else{ return }
+        self.delegate?.livePlayDidBegin(self)
+      })
+      
     }
   }
-  
   
   deinit {
     NotificationCenter.default.removeObserver(self)

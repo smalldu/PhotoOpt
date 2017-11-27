@@ -63,6 +63,7 @@ class PhotoPreviewCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     playerView.isHidden = true
+    playerView.isFillContent = false
     scrollView.maximumZoomScale = 3.0
     scrollView.minimumZoomScale = 1.0
     scrollView.delegate = self
@@ -127,7 +128,14 @@ extension PhotoPreviewCell: PlayerViewDelegate{
       playerView.isHidden = true
     }
   }
-  
+  func livePlayDidStop(_ view: PlayerView) {
+    if playerView.isHidden == false{
+      playerView.isHidden = true
+    }
+  }
+  func livePlayDidBegin(_ view: PlayerView) {
+    playerView.isHidden = false
+  }
 }
 
 

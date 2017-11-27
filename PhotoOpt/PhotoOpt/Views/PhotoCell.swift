@@ -116,7 +116,14 @@ extension PhotoCell: PlayerViewDelegate{
       playerView.isHidden = true
     }
   }
-  
+  func livePlayDidStop(_ view: PlayerView) {
+    if playerView.isHidden == false{
+      playerView.isHidden = true
+    }
+  }
+  func livePlayDidBegin(_ view: PlayerView) {
+    playerView.isHidden = false
+  }
 }
 
 

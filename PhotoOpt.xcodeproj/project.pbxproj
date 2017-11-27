@@ -11,6 +11,7 @@
 		2051CC4E1FC6CE680055971F /* PhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2051CC4C1FC6CE680055971F /* PhotoPreviewCell.swift */; };
 		2051CC4F1FC6CE680055971F /* PhotoPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2051CC4D1FC6CE680055971F /* PhotoPreviewCell.xib */; };
 		2051CC511FC6D72E0055971F /* PhotoPreviewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2051CC501FC6D72E0055971F /* PhotoPreviewBottomView.swift */; };
+		205D32AD1FCBB77F00C33683 /* Notification+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D32AC1FCBB77F00C33683 /* Notification+exts.swift */; };
 		206C15661FC949FA0029593E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C15651FC949FA0029593E /* PlayerView.swift */; };
 		20C3F6951FBEC1A80062AB0C /* UIColor+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */; };
 		20C3F6971FBEE04E0062AB0C /* SelectedAssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */; };
@@ -60,6 +61,7 @@
 		2051CC4C1FC6CE680055971F /* PhotoPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewCell.swift; sourceTree = "<group>"; };
 		2051CC4D1FC6CE680055971F /* PhotoPreviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPreviewCell.xib; sourceTree = "<group>"; };
 		2051CC501FC6D72E0055971F /* PhotoPreviewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewBottomView.swift; sourceTree = "<group>"; };
+		205D32AC1FCBB77F00C33683 /* Notification+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+exts.swift"; sourceTree = "<group>"; };
 		206C15651FC949FA0029593E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+exts.swift"; sourceTree = "<group>"; };
 		20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAssetManager.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */,
 				20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */,
 				20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */,
+				205D32AC1FCBB77F00C33683 /* Notification+exts.swift */,
 			);
 			path = Exts;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				20EDCB861FAC7D920009C4C1 /* UIView+exts.swift in Sources */,
 				C4AC9FF61FAC9F35003D8B1B /* PhotoCell.swift in Sources */,
 				20EDCB441FAC43D40009C4C1 /* PHAsset+ext.swift in Sources */,
+				205D32AD1FCBB77F00C33683 /* Notification+exts.swift in Sources */,
 				20EDCB161FAC435D0009C4C1 /* ViewController.swift in Sources */,
 				20EDCB8B1FAD60BC0009C4C1 /* PhotoCategoryCell.swift in Sources */,
 				20C3F7431FC6C35A0062AB0C /* PhotoListController+Delegate.swift in Sources */,
