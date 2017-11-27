@@ -225,7 +225,7 @@ extension PreviewController: PhotoPreviewBottomDelegate , PhotoPreviewCellDelega
       })
       return
     }else{
-      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
+      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage, type: cell.type , movURL:cell.movURL)
     }
     cell.toggle()
     btmView.changeSelectedCount()

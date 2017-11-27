@@ -14,6 +14,8 @@ public class AssetItem {
   public var exifInfo: [String: Any]?
   public var data: Data?
   public var uti: String?
+  public var type: PhotoType?
+  public var movURL: URL?  // 只有live photo 有值
   public var isGIF: Bool {
     return asset.isGIF
   }
@@ -21,7 +23,7 @@ public class AssetItem {
     self.asset = asset
   }
   
-  public init(image: UIImage?,exifInfo: [String: Any]?){
+  public init(image: UIImage?,exifInfo: [String: Any]? ){
     self.image = image
     self.asset = PHAsset()
     self.exifInfo = exifInfo

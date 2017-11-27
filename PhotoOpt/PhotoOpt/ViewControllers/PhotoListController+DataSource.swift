@@ -46,6 +46,7 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
         }
       }
     }
+    
     if cell.type == .live {
       if let url = photoCache[asset]?.movURL {
         cell.movURL = url

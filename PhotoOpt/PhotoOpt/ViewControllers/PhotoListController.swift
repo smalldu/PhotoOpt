@@ -145,6 +145,7 @@ class PhotoListController: UIViewController {
   }
   
   deinit {
+    Player.shared.currentPlayer = nil  // 销毁
     print("PhotoListController 已销毁")
   }
 }

@@ -22,7 +22,7 @@ class SelectedAssetManager{
     self.items.removeAll()
   }
   
-  func toggle(_ item: PHAsset , image: UIImage?) {
+  func toggle(_ item: PHAsset , image: UIImage? ,type: PhotoType? , movURL: URL? ) {
     let assets = items.map{ $0.asset }
     if assets.contains(item) {
       if let index = assets.index(where: { $0 == item }){
@@ -32,6 +32,8 @@ class SelectedAssetManager{
       // 添加到 Items
       let assetItem = AssetItem(asset: item)
       assetItem.image = image
+      assetItem.type = type
+      assetItem.movURL = movURL
       assetItem.request()
       items.append(assetItem)
     }

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-enum PhotoType: String {
+public enum PhotoType: String {
   case live = "Live"
   case gif = "Gif"
   case normal
@@ -60,7 +60,6 @@ class PhotoCell: UICollectionViewCell {
       }
     }
   }
-  
   
   var isChoosed: Bool  = false{
     didSet{
@@ -113,15 +112,18 @@ extension PhotoCell: PlayerViewDelegate{
   
   func livePlayDidFinish(_ view: PlayerView) {
     if playerView.isHidden == false{
+      liveButton.isHidden = false
       playerView.isHidden = true
     }
   }
   func livePlayDidStop(_ view: PlayerView) {
     if playerView.isHidden == false{
+      liveButton.isHidden = false
       playerView.isHidden = true
     }
   }
   func livePlayDidBegin(_ view: PlayerView) {
+    liveButton.isHidden = true
     playerView.isHidden = false
   }
 }

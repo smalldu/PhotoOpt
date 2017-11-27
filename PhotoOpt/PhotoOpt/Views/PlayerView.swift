@@ -15,13 +15,9 @@ protocol PlayerViewDelegate: class {
   func livePlayDidBegin(_ view: PlayerView)
 }
 
-// TODO: - 结束要销毁
 class Player {
   static let shared = Player()
   var currentPlayer: AVPlayer?
-  var maxCount: Int = 5 // 最大12个元素
-  var currentIndex: Int = 0
-  var playerPool: [AVPlayer] = []
   
   func player()->AVPlayer{
     currentPlayer?.pause()
@@ -29,14 +25,6 @@ class Player {
       let avplayer = AVPlayer()
       currentPlayer = avplayer
     }
-//    if playerPool.count < maxCount {
-//      playerPool.append(avplayer)
-//    }
-//    let index = currentIndex
-//    if currentIndex == maxCount - 1{
-//      currentIndex = 0
-//    }
-//    currentIndex += 1
     return currentPlayer!
   }
 }
@@ -95,6 +83,7 @@ class PlayerView: UIView {
       if self.avplayer?.currentItem != avItem {
         self.avplayer?.replaceCurrentItem(with: avItem!)
       }
+      self.avplayer?.isMuted = true // 设置为静音
       // 停止所有播放
       NotificationCenter.default.post(name: NSNotification.Name.kStopPlay, object: nil)
       CATransaction.begin()
@@ -108,12 +97,11 @@ class PlayerView: UIView {
       playerLayer.contentsScale = UIScreen.main.scale
       CATransaction.commit()
       avplayer?.play()
-//      Double(Int64(time * Double(NSEC_PER_SEC))
+      // 隔0.1秒显示否则 界面会跳一帧，上一次播放的帧
       DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1 , execute: { [weak self] in
         guard let `self` = self else{ return }
         self.delegate?.livePlayDidBegin(self)
       })
-      
     }
   }
   

@@ -16,15 +16,15 @@ extension PhotoListController: PhotoBottomViewDelegate, PhotoCellDelegate{
     }
     guard let asset = self.category?.result?.object(at: indexPath.item) else { return }
     if SelectedAssetManager.shared.selectedCount == maxSelectedCount - 1 && !SelectedAssetManager.shared.contains(asset) {
-      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
+      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage, type: cell.type , movURL:cell.movURL )
       collectionView.reloadData()
     }else if SelectedAssetManager.shared.selectedCount == maxSelectedCount && SelectedAssetManager.shared.contains(asset){
-      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
+      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage, type: cell.type , movURL:cell.movURL)
       collectionView.reloadData()
     }else if SelectedAssetManager.shared.selectedCount == maxSelectedCount &&  !SelectedAssetManager.shared.contains(asset) {
       return
     }else{
-      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage)
+      SelectedAssetManager.shared.toggle(asset,image: cell.thumbnailImage, type: cell.type , movURL:cell.movURL)
     }
     cell.toggle()
     self.btmView.changeSelectedCount()

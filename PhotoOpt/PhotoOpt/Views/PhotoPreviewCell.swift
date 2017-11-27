@@ -125,15 +125,18 @@ extension PhotoPreviewCell: PlayerViewDelegate{
   
   func livePlayDidFinish(_ view: PlayerView) {
     if playerView.isHidden == false{
+      liveButton.isHidden = false
       playerView.isHidden = true
     }
   }
   func livePlayDidStop(_ view: PlayerView) {
     if playerView.isHidden == false{
+      liveButton.isHidden = false
       playerView.isHidden = true
     }
   }
   func livePlayDidBegin(_ view: PlayerView) {
+    liveButton.isHidden = true
     playerView.isHidden = false
   }
 }
