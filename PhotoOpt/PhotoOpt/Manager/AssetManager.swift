@@ -8,6 +8,8 @@
 
 import UIKit
 import Photos
+import ImageIO
+import MobileCoreServices
 
 struct AssetCategory {
   
@@ -68,6 +70,48 @@ class AssetManager {
           category.collection = collection
           self.categorys.append(category)
         }
+      }
+    }
+  }
+  
+  func generalGifImages(data: Data , complete: @escaping ((_ image: UIImage?)->())){
+    DispatchQueue.global(qos: .background).async {
+      let options: NSDictionary = [kCGImageSourceShouldCache as String: NSNumber(value: true), kCGImageSourceTypeIdentifierHint as String: kUTTypeGIF]
+      guard let imageSource = CGImageSourceCreateWithData(data as CFData, options) else {
+        fatalError("data error")
+      }
+      let frameCount = CGImageSourceGetCount(imageSource)
+      var images = [UIImage]()
+      print("帧数量为 \(frameCount)")
+      var gifDuration = 0.0
+      
+      for i in 0 ..< frameCount {
+        // 获取对应帧的 CGImage
+        guard let imageRef = CGImageSourceCreateImageAtIndex(imageSource, i, options) else {
+          fatalError("获取对应帧error")
+        }
+        if frameCount == 1 {
+          // 单帧
+          gifDuration = Double.infinity
+        } else{
+          // gif 动画
+          // 获取到 gif每帧时间间隔
+          guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) , let gifInfo = (properties as NSDictionary)[kCGImagePropertyGIFDictionary as String] as? NSDictionary,
+            let frameDuration = (gifInfo[kCGImagePropertyGIFDelayTime as String] as? NSNumber) else
+          {
+            fatalError("获取属性error")
+          }
+          //                print(frameDuration)
+          gifDuration += frameDuration.doubleValue
+          // 获取帧的img
+          let  image = UIImage(cgImage: imageRef , scale: UIScreen.main.scale , orientation: .up)
+          // 添加到数组
+          images.append(image)
+        }
+      }
+      DispatchQueue.main.async {
+        let image = UIImage.animatedImage(with: images, duration: gifDuration)
+        complete(image)
       }
     }
   }

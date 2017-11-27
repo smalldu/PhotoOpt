@@ -89,6 +89,9 @@ class PhotoCell: UICollectionViewCell {
   }
   
   
+  
+  
+  
   @objc func selectBtnClick(){
     delegate?.photoCellDidChoose(self)
   }

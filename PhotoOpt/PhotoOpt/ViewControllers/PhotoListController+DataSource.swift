@@ -47,6 +47,24 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
       }
     }
     
+    if cell.type == .gif{
+      if let image = photoCache[asset]?.gifImage{
+        // 从缓存中获取
+        cell.thumbnailImage = image
+      }else{
+        PHImageManager.default().requestImageData(for: asset , options: nil) { [weak self] (data, uti,  orientation , info) in
+          guard let `self` = self else { return }
+          if let data = data{
+            self.assetManager.generalGifImages(data: data, complete: { [weak self](image) in
+              guard let `self` = self else{ return }
+              self.photoCache[asset]?.gifImage = image
+              cell.thumbnailImage = image
+            })
+          }
+        }
+      }
+    }
+    
     if cell.type == .live {
       if let url = photoCache[asset]?.movURL {
         cell.movURL = url
@@ -104,6 +122,7 @@ extension PhotoListController: UICollectionViewDataSource,UICollectionViewDelega
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     updateCachedAssets()
   }
+
 }
 
 

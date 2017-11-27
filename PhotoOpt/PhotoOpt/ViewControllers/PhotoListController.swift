@@ -17,7 +17,7 @@ struct PhotoListCache {
   var image: UIImage?
   var movData: Data?
   var movURL: URL?
-  var gifData: Data?
+  var gifImage: UIImage?
 }
 
 class PhotoListController: UIViewController {
