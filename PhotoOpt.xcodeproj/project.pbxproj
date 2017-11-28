@@ -12,6 +12,7 @@
 		2051CC4F1FC6CE680055971F /* PhotoPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2051CC4D1FC6CE680055971F /* PhotoPreviewCell.xib */; };
 		2051CC511FC6D72E0055971F /* PhotoPreviewBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2051CC501FC6D72E0055971F /* PhotoPreviewBottomView.swift */; };
 		205D32AD1FCBB77F00C33683 /* Notification+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D32AC1FCBB77F00C33683 /* Notification+exts.swift */; };
+		2061E2861FCD4A42009B1090 /* UIViewController+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061E2851FCD4A42009B1090 /* UIViewController+exts.swift */; };
 		206C15661FC949FA0029593E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C15651FC949FA0029593E /* PlayerView.swift */; };
 		20C3F6951FBEC1A80062AB0C /* UIColor+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */; };
 		20C3F6971FBEE04E0062AB0C /* SelectedAssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */; };
@@ -23,7 +24,7 @@
 		20EDCB1E1FAC435D0009C4C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20EDCB1C1FAC435D0009C4C1 /* LaunchScreen.storyboard */; };
 		20EDCB291FAC435D0009C4C1 /* PhotoOptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB281FAC435D0009C4C1 /* PhotoOptTests.swift */; };
 		20EDCB341FAC435D0009C4C1 /* PhotoOptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB331FAC435D0009C4C1 /* PhotoOptUITests.swift */; };
-		20EDCB441FAC43D40009C4C1 /* PHAsset+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */; };
+		20EDCB441FAC43D40009C4C1 /* PHAsset+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB431FAC43D40009C4C1 /* PHAsset+exts.swift */; };
 		20EDCB471FAC4FE70009C4C1 /* PhotoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB461FAC4FE70009C4C1 /* PhotoListController.swift */; };
 		20EDCB841FAC7CAE0009C4C1 /* PhotoBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB831FAC7CAE0009C4C1 /* PhotoBottomView.swift */; };
 		20EDCB861FAC7D920009C4C1 /* UIView+exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */; };
@@ -62,6 +63,7 @@
 		2051CC4D1FC6CE680055971F /* PhotoPreviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPreviewCell.xib; sourceTree = "<group>"; };
 		2051CC501FC6D72E0055971F /* PhotoPreviewBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewBottomView.swift; sourceTree = "<group>"; };
 		205D32AC1FCBB77F00C33683 /* Notification+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+exts.swift"; sourceTree = "<group>"; };
+		2061E2851FCD4A42009B1090 /* UIViewController+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+exts.swift"; sourceTree = "<group>"; };
 		206C15651FC949FA0029593E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+exts.swift"; sourceTree = "<group>"; };
 		20C3F6961FBEE04E0062AB0C /* SelectedAssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAssetManager.swift; sourceTree = "<group>"; };
@@ -79,7 +81,7 @@
 		20EDCB2F1FAC435D0009C4C1 /* PhotoOptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoOptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20EDCB331FAC435D0009C4C1 /* PhotoOptUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoOptUITests.swift; sourceTree = "<group>"; };
 		20EDCB351FAC435D0009C4C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+ext.swift"; sourceTree = "<group>"; };
+		20EDCB431FAC43D40009C4C1 /* PHAsset+exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+exts.swift"; sourceTree = "<group>"; };
 		20EDCB461FAC4FE70009C4C1 /* PhotoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListController.swift; sourceTree = "<group>"; };
 		20EDCB831FAC7CAE0009C4C1 /* PhotoBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBottomView.swift; sourceTree = "<group>"; };
 		20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+exts.swift"; sourceTree = "<group>"; };
@@ -186,10 +188,11 @@
 		20EDCB421FAC43D40009C4C1 /* Exts */ = {
 			isa = PBXGroup;
 			children = (
-				20EDCB431FAC43D40009C4C1 /* PHAsset+ext.swift */,
+				20EDCB431FAC43D40009C4C1 /* PHAsset+exts.swift */,
 				20EDCB851FAC7D920009C4C1 /* UIView+exts.swift */,
 				20C3F6941FBEC1A80062AB0C /* UIColor+exts.swift */,
 				205D32AC1FCBB77F00C33683 /* Notification+exts.swift */,
+				2061E2851FCD4A42009B1090 /* UIViewController+exts.swift */,
 			);
 			path = Exts;
 			sourceTree = "<group>";
@@ -376,7 +379,7 @@
 				C4AC9FF91FACA564003D8B1B /* PhotoListController+CacheAssets.swift in Sources */,
 				20EDCB861FAC7D920009C4C1 /* UIView+exts.swift in Sources */,
 				C4AC9FF61FAC9F35003D8B1B /* PhotoCell.swift in Sources */,
-				20EDCB441FAC43D40009C4C1 /* PHAsset+ext.swift in Sources */,
+				20EDCB441FAC43D40009C4C1 /* PHAsset+exts.swift in Sources */,
 				205D32AD1FCBB77F00C33683 /* Notification+exts.swift in Sources */,
 				20EDCB161FAC435D0009C4C1 /* ViewController.swift in Sources */,
 				20EDCB8B1FAD60BC0009C4C1 /* PhotoCategoryCell.swift in Sources */,
@@ -386,6 +389,7 @@
 				20EDCB841FAC7CAE0009C4C1 /* PhotoBottomView.swift in Sources */,
 				20EDCB471FAC4FE70009C4C1 /* PhotoListController.swift in Sources */,
 				20C3F6951FBEC1A80062AB0C /* UIColor+exts.swift in Sources */,
+				2061E2861FCD4A42009B1090 /* UIViewController+exts.swift in Sources */,
 				20EDCB141FAC435D0009C4C1 /* AppDelegate.swift in Sources */,
 				C4AC9FF11FAC9B55003D8B1B /* AssetManager.swift in Sources */,
 				2051CC511FC6D72E0055971F /* PhotoPreviewBottomView.swift in Sources */,
