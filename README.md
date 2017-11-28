@@ -1,13 +1,8 @@
 # PhotoOpt
 
-http://shortcuts.design/index.html
-https://www.hackingwithswift.com/articles
 
-资料 
-http://ohmyz.sh/
-https://github.com/onmyway133/fantastic-ios-animation
 
-https://objccn.io/issue-21-4/
-http://www.jianshu.com/p/42e5d2f75452/
-https://github.com/zhangao0086/DKImagePickerController 
-https://github.com/hyperoslo/ImagePicker
+<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+    <source id="mp4" src="https://github.com/smalldu/PhotoOpt/blob/master/photoOpt.MP4" type="video/mp4">
+    <p>Your user agent does not support the HTML5 Video element.</p>
+</video>
